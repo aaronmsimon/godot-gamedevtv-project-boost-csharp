@@ -30,11 +30,23 @@ public partial class Player : RigidBody3D
 	{
 		if (body.GetGroups().Contains("Goal"))
 		{
-			GD.Print("You win!");
+			CompleteLevel();
 		}
 		if (body.GetGroups().Contains("Hazard"))
 		{
-			GD.Print("You missed the goal.");
+			CrashSequence();
 		}
+	}
+
+	private void CrashSequence()
+	{
+		GD.Print("KABOOM!");
+		GetTree().CallDeferred("reload_current_scene");
+	}
+
+	private void CompleteLevel()
+	{
+		GD.Print("Level Complete");
+		GetTree().Quit();
 	}
 }
