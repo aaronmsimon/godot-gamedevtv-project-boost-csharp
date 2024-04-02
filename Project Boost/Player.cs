@@ -1,20 +1,21 @@
+using System;
 using Godot;
 
-public partial class Player : Node3D
+public partial class Player : RigidBody3D
 {
 	public override void _Process(double delta)
 	{
 		if (Input.IsActionPressed("ui_accept"))
 		{
-			Position += Vector3.Up * (float)delta;
+			ApplyCentralForce(Basis.Y * (float)delta * 1000f);
 		}
 		if (Input.IsActionPressed("ui_left"))
 		{
-			RotateZ((float)delta);
+			ApplyTorque(Vector3.Back * (float)delta * 100f);
 		}
 		if (Input.IsActionPressed("ui_right"))
 		{
-			RotateZ((float)-delta);
+			ApplyTorque(Vector3.Forward * (float)delta * 100f);
 		}
 	}
 }
