@@ -29,7 +29,7 @@ by [GameDev.tv](https://www.gamedev.tv)
 
 ### Project Boost
 - Section Intro - Project Boost (1:05)
-- Your First Script (13:51)
+- [Your First Script](https://github.com/aaronmsimon/godot-gamedevtv-project-boost-csharp/commit/963b1c90caa5749fc0c2c2fbf292f06f834bab1f) (13:51)
 - Scripting Essentials (14:24)
 - Controlling the Player (12:26)
 - Blocking Out the Level (11:47)
