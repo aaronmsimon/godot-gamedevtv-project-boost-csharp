@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="Project Boost"
-run/main_scene="res://Level/level.tscn"
+run/main_scene="res://Level/level1.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://rocket-svgrepo-com.svg"
 
 [dotnet]
 

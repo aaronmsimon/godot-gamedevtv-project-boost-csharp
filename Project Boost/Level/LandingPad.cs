@@ -1,9 +1,8 @@
-using System.Windows.Markup;
 using Godot;
 
 public partial class LandingPad : CsgBox3D
 {
-    [Export(PropertyHint.File,"*.tscn")]
+    [Export(PropertyHint.File, "*.tscn")]
     private string filePath;
 
     public string FilePath
