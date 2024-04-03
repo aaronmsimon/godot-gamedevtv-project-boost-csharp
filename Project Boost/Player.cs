@@ -5,6 +5,10 @@ public partial class Player : RigidBody3D
 {
 	[Export(PropertyHint.Range,"750,3000")] private float thrust = 1000f;
 	[Export] private float torque = 100f;
+	[Export] private float sceneReloadTime = 1f;
+	[Export] private float levelCompleteTime = 1f;
+
+	private bool isTransitioning = false;
 
     public override void _Ready()
     {
@@ -29,26 +33,35 @@ public partial class Player : RigidBody3D
 
 	private void OnBodyEntered(Node body)
 	{
-		if (body.GetGroups().Contains("Goal"))
+		if (!isTransitioning)
 		{
-			LandingPad lp = (LandingPad)body;
-			CompleteLevel(lp.FilePath);
-		}
-		if (body.GetGroups().Contains("Hazard"))
-		{
-			CrashSequence();
+			if (body.GetGroups().Contains("Goal"))
+			{
+				LandingPad lp = (LandingPad)body;
+				CompleteLevel(lp.FilePath);
+			}
+			if (body.GetGroups().Contains("Hazard"))
+			{
+				CrashSequence();
+			}
 		}
 	}
 
-	private void CrashSequence()
+	private async void CrashSequence()
 	{
 		GD.Print("KABOOM!");
+		SetProcess(false);
+		isTransitioning = true;
+		await ToSignal(GetTree().CreateTimer(sceneReloadTime), Timer.SignalName.Timeout);
 		GetTree().CallDeferred("reload_current_scene");
 	}
 
-	private void CompleteLevel(String nextLevelFile)
+	private async void CompleteLevel(String nextLevelFile)
 	{
 		GD.Print("Level Complete");
+		SetProcess(false);
+		isTransitioning = true;
+		await ToSignal(GetTree().CreateTimer(levelCompleteTime), Timer.SignalName.Timeout);
 		GetTree().ChangeSceneToFile(nextLevelFile);
 	}
 }
