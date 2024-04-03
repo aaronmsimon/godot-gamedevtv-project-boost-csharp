@@ -8,10 +8,16 @@ public partial class Player : RigidBody3D
 	[Export] private float sceneReloadTime = 1f;
 	[Export] private float levelCompleteTime = 1f;
 
+	private AudioStreamPlayer explosionAudio;
+	private AudioStreamPlayer successAudio;
+
 	private bool isTransitioning = false;
 
     public override void _Ready()
     {
+		explosionAudio = GetNode<AudioStreamPlayer>("ExplosionAudio");
+		successAudio = GetNode<AudioStreamPlayer>("SuccessAudio");
+
         BodyEntered += OnBodyEntered;
     }
 
@@ -50,6 +56,7 @@ public partial class Player : RigidBody3D
 	private async void CrashSequence()
 	{
 		GD.Print("KABOOM!");
+		explosionAudio.Play();
 		SetProcess(false);
 		isTransitioning = true;
 		await ToSignal(GetTree().CreateTimer(sceneReloadTime), Timer.SignalName.Timeout);
@@ -59,6 +66,7 @@ public partial class Player : RigidBody3D
 	private async void CompleteLevel(String nextLevelFile)
 	{
 		GD.Print("Level Complete");
+		successAudio.Play();
 		SetProcess(false);
 		isTransitioning = true;
 		await ToSignal(GetTree().CreateTimer(levelCompleteTime), Timer.SignalName.Timeout);
