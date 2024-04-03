@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Player : RigidBody3D
@@ -30,7 +31,8 @@ public partial class Player : RigidBody3D
 	{
 		if (body.GetGroups().Contains("Goal"))
 		{
-			CompleteLevel();
+			LandingPad lp = (LandingPad)body;
+			CompleteLevel(lp.FilePath);
 		}
 		if (body.GetGroups().Contains("Hazard"))
 		{
@@ -44,9 +46,9 @@ public partial class Player : RigidBody3D
 		GetTree().CallDeferred("reload_current_scene");
 	}
 
-	private void CompleteLevel()
+	private void CompleteLevel(String nextLevelFile)
 	{
 		GD.Print("Level Complete");
-		GetTree().Quit();
+		GetTree().ChangeSceneToFile(nextLevelFile);
 	}
 }
