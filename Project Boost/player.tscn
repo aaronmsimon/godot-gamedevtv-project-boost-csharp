@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ssytly52t51e"]
+[gd_scene load_steps=7 format=3 uid="uid://ssytly52t51e"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_l3dv6"]
-[ext_resource type="AudioStream" uid="uid://yabcmy4cwb5y" path="res://Sounds/SFX - Death Explosion.ogg" id="2_6c2y6"]
-[ext_resource type="AudioStream" uid="uid://bow3sf345e5tf" path="res://Sounds/SFX - Success.ogg" id="3_yr6i2"]
+[ext_resource type="AudioStream" uid="uid://yabcmy4cwb5y" path="res://Audio/SFX - Death Explosion.ogg" id="2_aqh4x"]
+[ext_resource type="AudioStream" uid="uid://bow3sf345e5tf" path="res://Audio/SFX - Success.ogg" id="3_ijqjv"]
+[ext_resource type="AudioStream" uid="uid://bdkhqtcoti4gg" path="res://Audio/SFX - Main engine thrust.ogg" id="4_dreeu"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1yd7m"]
 
@@ -18,7 +19,7 @@ linear_damp = 1.0
 angular_damp = 3.0
 script = ExtResource("1_l3dv6")
 sceneReloadTime = 2.5
-levelCompleteTime = 1.5
+levelCompleteTime = 1.75
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_1yd7m")
@@ -27,7 +28,10 @@ mesh = SubResource("CylinderMesh_1yd7m")
 shape = SubResource("CylinderShape3D_1bfqw")
 
 [node name="ExplosionAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_6c2y6")
+stream = ExtResource("2_aqh4x")
 
 [node name="SuccessAudio" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_yr6i2")
+stream = ExtResource("3_ijqjv")
+
+[node name="RocketAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_dreeu")
