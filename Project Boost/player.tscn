@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://ssytly52t51e"]
+[gd_scene load_steps=15 format=3 uid="uid://ssytly52t51e"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_l3dv6"]
+[ext_resource type="Material" uid="uid://ct00isauqeowm" path="res://Materials/ship_fuscia_mat.tres" id="2_8fq3a"]
 [ext_resource type="AudioStream" uid="uid://yabcmy4cwb5y" path="res://Audio/SFX - Death Explosion.ogg" id="2_aqh4x"]
 [ext_resource type="AudioStream" uid="uid://bow3sf345e5tf" path="res://Audio/SFX - Success.ogg" id="3_ijqjv"]
 [ext_resource type="AudioStream" uid="uid://bdkhqtcoti4gg" path="res://Audio/SFX - Main engine thrust.ogg" id="4_dreeu"]
@@ -47,28 +48,34 @@ mesh = SubResource("CylinderMesh_1yd7m")
 
 [node name="Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+material_override = ExtResource("2_8fq3a")
 mesh = SubResource("CylinderMesh_tlqcb")
 
 [node name="Cockpit" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("2_8fq3a")
 mesh = SubResource("CylinderMesh_iownd")
 skeleton = NodePath("../..")
 
 [node name="RightArm" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(0.719849, -0.694131, 0, 0.694131, 0.719849, 0, 0, 0, 1, 0.270694, -0.438052, 0)
+material_override = ExtResource("2_8fq3a")
 mesh = SubResource("BoxMesh_71qdw")
 
 [node name="RightThruster" type="MeshInstance3D" parent="Body/RightArm"]
 transform = Transform3D(0.719849, 0.694131, 0, -0.694131, 0.719849, 0, 0, 0, 1, -0.0193318, -0.206334, 0)
+material_override = ExtResource("2_8fq3a")
 mesh = SubResource("CapsuleMesh_vruqx")
 skeleton = NodePath("../..")
 
 [node name="LeftArm" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(0.71934, 0.694658, 0, -0.694658, 0.71934, 0, 0, 0, 1, -0.271, -0.438, 0)
+material_override = ExtResource("2_8fq3a")
 mesh = SubResource("BoxMesh_71qdw")
 
 [node name="LeftThruster" type="MeshInstance3D" parent="Body/LeftArm"]
 transform = Transform3D(0.71934, -0.694658, 0, 0.694658, 0.71934, 0, 0, 0, 1, 0.0197399, -0.206144, 0)
+material_override = ExtResource("2_8fq3a")
 mesh = SubResource("CapsuleMesh_vruqx")
 skeleton = NodePath("../..")
 
