@@ -14,6 +14,8 @@ public partial class Player : RigidBody3D
 	private GpuParticles3D boosterParticles;
 	private GpuParticles3D rightBoosterParticles;
 	private GpuParticles3D leftBoosterParticles;
+	private GpuParticles3D explosionParticles;
+	private GpuParticles3D successParticles;
 
 	private bool isTransitioning = false;
 
@@ -25,6 +27,8 @@ public partial class Player : RigidBody3D
 		boosterParticles = GetNode<GpuParticles3D>("BoosterParticles");
 		rightBoosterParticles = GetNode<GpuParticles3D>("RightBoosterParticles");
 		leftBoosterParticles = GetNode<GpuParticles3D>("LeftBoosterParticles");
+		explosionParticles = GetNode<GpuParticles3D>("ExplosionParticles");
+		successParticles = GetNode<GpuParticles3D>("SuccessParticles");
 
         BodyEntered += OnBodyEntered;
     }
@@ -90,6 +94,7 @@ public partial class Player : RigidBody3D
 	{
 		GD.Print("KABOOM!");
 		explosionAudio.Play();
+		explosionParticles.Emitting = true;
 		SetProcess(false);
 		isTransitioning = true;
 		await ToSignal(GetTree().CreateTimer(sceneReloadTime), Timer.SignalName.Timeout);
@@ -100,6 +105,7 @@ public partial class Player : RigidBody3D
 	{
 		GD.Print("Level Complete");
 		successAudio.Play();
+		successParticles.Emitting = true;
 		SetProcess(false);
 		isTransitioning = true;
 		await ToSignal(GetTree().CreateTimer(levelCompleteTime), Timer.SignalName.Timeout);
